@@ -55,12 +55,12 @@ func main()  {
 	//utf8Reader := transform.NewReader(resq.Body,e.NewDecoder())
 
 
-	data, err := ioutil.ReadAll(utf8Reader)
+	data, err2 := ioutil.ReadAll(utf8Reader)
 
 	//v3 diff end
 
 
-	if err != nil{
+	if err2 != nil{
 		panic(err)
 	}
 

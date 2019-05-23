@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-	"goland.org/x/text/encoding"
-	"goland.org/x/text/encoding/simplifiedchinese"
-	"goland.org/x/text/transform"
+	"golang.org/x/text/encoding/simplifiedchinese"
+	"golang.org/x/text/transform"
 	_ "io"
 	"io/ioutil"
 	"net/http"

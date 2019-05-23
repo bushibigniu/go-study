@@ -3,9 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"goland.org/x/net/html/charset"
-	"goland.org/x/text/encoding"
-	"goland.org/x/text/transform"
+	"golang.org/x/net/html/charset"
+	"golang.org/x/text/encoding"
+	"golang.org/x/text/transform"
 	"io"
 	"io/ioutil"
 	"net/http"
