@@ -27,11 +27,7 @@ func main()  {
 		return
 	}
 
-
- 
-  	data, err := ioutil.ReadAll(utf8Reader)
-
-
+  	data, err := ioutil.ReadAll(resq.Body)
 	if err != nil{
 		panic(err)
 	}
