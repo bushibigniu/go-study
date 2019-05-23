@@ -48,6 +48,8 @@ func main()  {
 	utf8Reader := transform.NewReader(bodyReader,e.NewDecoder())
 	data, err := ioutil.ReadAll(utf8Reader)
 
+
+
 	//v3 old
 	//e := determineEncoding(resq.Body)
 	//utf8Reader := transform.NewReader(resq.Body,e.NewDecoder())
