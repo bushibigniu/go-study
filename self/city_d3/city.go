@@ -12,8 +12,10 @@ import (
 	"regexp"
 )
 
-//v2 加字符版
+
 func main()  {
+	
+	//begin  把这部分抽象出来 就是一个engine
 	url := "http://www.zhenai.com/zhenghun"
 	resq, err := http.Get(url)
 
@@ -41,6 +43,8 @@ func main()  {
 	}
 
 	fmt.Printf("%s \n", data)
+	
+	//end
 
 	printCityList(data)
 
