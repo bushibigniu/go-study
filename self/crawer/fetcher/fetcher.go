@@ -1,4 +1,4 @@
-package Fetcher
+package fetcher
 
 import (
 	"bufio"
@@ -45,7 +45,7 @@ func determineEncoding(r io.Reader) encoding.Encoding {
 
 	if err != nil{
 		//panic(err)
-		log.Printf("Fetcher error: %v", err)
+		log.Printf("fetcher error: %v", err)
 		//不要 panic ,默认返回一个utf8
 		return unicode.UTF8
 	}
