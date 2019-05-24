@@ -19,7 +19,6 @@ func Fetch(url string) ([]byte, error) {
 
 	//url := "http://www.zhenai.com/zhenghun"
 	resq, err := http.Get(url)
-
 	if err != nil{
 		panic(err)
 	}
@@ -33,7 +32,6 @@ func Fetch(url string) ([]byte, error) {
 	}
 
 	e := determineEncoding(resq.Body)
-
 	utf8Reader := transform.NewReader(resq.Body, e.NewDecoder())
 
 	return ioutil.ReadAll(utf8Reader)
