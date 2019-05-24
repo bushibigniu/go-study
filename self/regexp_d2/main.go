@@ -12,11 +12,8 @@ func main ()  {
 	nw%biw qq@www.vom
 	88@om.cn
 	`
-
 	re := regexp.MustCompile(`[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+`)
-
 	reg := regexp.MustCompile(`([a-zA-Z0-9]+)@([a-zA-Z0-9]+)(\.[a-zA-Z0-9]+)`)
-
 
 	//one
 	match := re.FindString(str)
@@ -38,11 +35,9 @@ func main ()  {
 	}
 
 	fmt.Println("==============")
-
 	for _, m := range m3{
 		for _, v := range m{
 			fmt.Printf("%s ", v)
 		}
 	}
-
 }
