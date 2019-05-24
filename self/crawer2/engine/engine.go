@@ -5,6 +5,20 @@ import (
 	"log"
 )
 
+/**
+
+	engine.Request{
+		Url:url,
+		ParserFunc:parser.ParseCityList,
+	}
+	这个是传进来的参数，是一个struct，也就是下面使用的r,
+	r.Url 值就是  url
+	r.ParserFunc 就是 parser.ParseCityList
+	所以 会调起来 ParseCityList 方法，获取城市列表
+	
+	
+
+ */
 
 func Run(seed ...Request) {
 	//最终是 engine 去执行，所以写个 run
