@@ -5,7 +5,7 @@ import (
 	"go-study/self/crawer2/engine"
 	"regexp"
 )
-//<a target="_blank" href="http://www.zhenai.com/zhenghun/shenzhen">深圳征婚</a>
+//<a target="_blank" href="http://www.zhenai.com/zhenghun/shenzhen">xxx</a>
 const regCity  = `<a href="(http://www.zhenai.com/zhenghun/[0-9a-z]+)"[^>]*>([^<]+)</a>`
 
 
