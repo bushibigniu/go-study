@@ -6,7 +6,6 @@ import (
 )
 
 /**
-
 	engine.Request{
 		Url:url,
 		ParserFunc:parser.ParseCityList,
@@ -15,8 +14,6 @@ import (
 	r.Url 值就是  url
 	r.ParserFunc 就是 parser.ParseCityList
 	所以 会调起来 ParseCityList 方法，获取城市列表
-	
-	
 
  */
 
