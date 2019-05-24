@@ -13,13 +13,11 @@ import (
 
 )
 
-
 func main()  {
 	
-	//begin  把这部分抽象出来  fetch
+	//begin  把这部分抽象出来 作为一个 fetcher
 	url := "http://www.zhenai.com/zhenghun"
 	resq, err := http.Get(url)
-
 	if err != nil{
 		panic(err)
 	}
@@ -29,27 +27,18 @@ func main()  {
 		fmt.Println("response code :", resq.StatusCode)
 		return
 	}
-
-
 	e := determineEncoding(resq.Body)
 	utf8Reader := transform.NewReader(resq.Body,e.NewDecoder())
-
-
 	data, err := ioutil.ReadAll(utf8Reader)
-
-
 
 	if err != nil{
 		panic(err)
 	}
 
 	fmt.Printf("%s \n", data)
-	
 	//end
 
 	printCityList(data)
-
-
 }
 
 func printCityList(content []byte)  {
@@ -75,7 +64,5 @@ func determineEncoding(r io.Reader) encoding.Encoding{
 	}
 
 	e, _, _ := charset.DetermineEncoding(byte,"")
-
 	return e
-
 }
