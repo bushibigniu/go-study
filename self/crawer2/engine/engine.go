@@ -17,6 +17,12 @@ import (
 
  */
 
+/**
+	s 第一次获取的是：http://www.zhenai.com/zhenghun
+	s 这个地址结果，然后将获取到的城市列表继续，往下访问，所以会看到一直在请求
+	s 但是 在 http://www.zhenai.com/zhenghun 这个地址 获取的结果，使用 了 NilParse，所以获取的地址就没有往下请求了
+*/
+
 func Run(seed ...Request) {
 	//最终是 engine 去执行，所以写个 run
 
@@ -40,7 +46,7 @@ func Run(seed ...Request) {
 
 		parseResult := r.ParserFunc(body)
 
-		//Requests 这是集合，使用... 将所有的都传进来
+		//Requests 这是集合，每一个都要请求，所以需要一直写下去， 用 ... 代替了所有
 		//requests = append(requests,
 		//	parseResult.Requests[0])
 		//requests = append(requests,
