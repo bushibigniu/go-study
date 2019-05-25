@@ -24,8 +24,11 @@ func ParseUserProfile2(contents []byte) engine.ParseResult {
 	fmt.Println(age)
 	fmt.Printf("age %s",age)
 
-
 	return engine.ParseResult{}
+}
+
+func extractString()  {
+
 }
 
 
@@ -47,9 +50,11 @@ func ParseUserProfile(content []byte, name string) engine.ParseResult {
 	}
 
 	result := engine.ParseResult{
+		//{profile} 是具体的值
 		Items:[]interface{}{profile},
 	}
 
+	//将profile 返回去
 	return result
 }
 
