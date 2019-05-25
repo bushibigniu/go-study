@@ -1,0 +1,39 @@
+
+知识:
+
+    1.正则匹配
+    2.解决编码
+    3.读取数据
+
+步骤:
+    1.获取 city list(访问 http://www.zhenai.com/zhenghun)
+
+
+
+
+
+func main()  {
+
+        s := ""
+        //i := 1
+        //to string
+
+        //string(i)
+
+        //to int
+        strconv.Atoi(s)
+}
+
+
+log.printf and fmt.printf
+
+//ps
+不一样的地方：
+1.request
+    http.Get
+
+    http.NewRequest
+    request.Header.Add
+
+
+2.
