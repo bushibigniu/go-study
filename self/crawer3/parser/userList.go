@@ -31,6 +31,10 @@ func ParseUser(body []byte)  engine.ParseResult{
 			Url:string(m[1]),
 			//v1 ParseFunc:ParseUserProfile,
 			//v2
+			/*这边的匿名函数是在 for 结束后运行的，
+			而m 的作用域 是在 for 里面的，
+			所以用m[2]会出现 取到的name 是一样的情况
+			 */
 			ParserFunc: func(c []byte) engine.ParseResult {
 				return ParseUserProfile(c, name)
 			},
