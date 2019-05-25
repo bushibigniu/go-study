@@ -5,6 +5,7 @@ import (
 	"go-study/self/crawer3/engine"
 	"go-study/self/crawer3/model"
 	"regexp"
+	"strconv"
 )
 
 //<div data-v-bff6f798="" class="m-btn purple">未婚</div>
@@ -12,22 +13,47 @@ const regexpInfo  = `<div (.*?)class="m-btn purple"(.*?)>([^<]+)</div>`
 const regexpInfo2  = `<div (.*?)class="m-btn pink"(.*?)>([^<]+)</div>`
 
 const age  = `<td><span class="label">年龄：</span>([\d]+)岁</td>`
+var ageRe = regexp.MustCompile(age)
 
 //废弃 因为正则不一样
 func ParseUserProfile2(contents []byte) engine.ParseResult {
-	re := regexp.MustCompile(age)
+	//re := regexp.MustCompile(age)
+	//	//
+	//	//fmt.Print("begin")
+	//	//
+	//	//age := re.FindSubmatch(contents)
+	//	//
+	//	//fmt.Println(age)
+	//	//fmt.Printf("age %s",age)
+	//	//
+	//	//return engine.ParseResult{}
 
-	fmt.Print("begin")
 
-	age := re.FindSubmatch(contents)
+	// 转成 int strconv.Atoi
+	//var profile = model.Profile{}
+	profile := model.Profile{}
 
-	fmt.Println(age)
-	fmt.Printf("age %s",age)
+	age, err := strconv.Atoi(extractString(contents, ageRe))
 
-	return engine.ParseResult{}
+	if err != nil {
+		//age
+		profile.Age = age
+	}
+
+	//
+	profile.Marriage = extractString(contents, marrages)
 }
 
-func extractString()  {
+func extractString(content []byte, re *regexp.Regexp) string{
+	match := re.FindSubmatch(content)
+
+	if len(match) >2 {
+		return string(match[1])
+	} else {
+		return ""
+	}
+
+
 
 }
 
