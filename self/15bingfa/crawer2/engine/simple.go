@@ -1,12 +1,16 @@
 package engine
 
 import (
-	"go-study/self/15bingfa/crawer/fetcher"
+	"go-study/self/15bingfa/crawer2/fetcher"
 	"log"
 )
 
+type SimpleEngine struct {
+
+}
+
 //scheduler 实现第一步：所有worker 公用一个输入
-func Run(seed ...Request) {
+func (e SimpleEngine) Run(seed ...Request) {
 
 	var requests []Request
 	for _, r := range seed {
@@ -26,7 +30,7 @@ func Run(seed ...Request) {
 			//}
 			//parseResult := r.ParserFunc(body)
 		//end  work
-		parseResult, err := worker(r)
+		parseResult, err := e.worker(r)
 		if err != nil {
 			continue
 		}
@@ -43,7 +47,7 @@ func Run(seed ...Request) {
 }
 
 //将 parser , fetcher 封装成一个 worker
-func worker(r Request) (ParseResult, error){
+func (e SimpleEngine) worker(r Request) (ParseResult, error){
 	log.Printf("fetcher url : %s", r.Url)
 	body, err := fetcher.Fetch(r.Url)
 	if err != nil {
