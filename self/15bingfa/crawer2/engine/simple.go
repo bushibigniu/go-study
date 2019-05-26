@@ -30,7 +30,7 @@ func (e SimpleEngine) Run(seed ...Request) {
 			//}
 			//parseResult := r.ParserFunc(body)
 		//end  work
-		parseResult, err := e.worker(r)
+		parseResult, err := worker(r)
 		if err != nil {
 			continue
 		}
@@ -47,7 +47,8 @@ func (e SimpleEngine) Run(seed ...Request) {
 }
 
 //将 parser , fetcher 封装成一个 worker
-func (e SimpleEngine) worker(r Request) (ParseResult, error){
+//func (e SimpleEngine) worker(r Request) (ParseResult, error){
+func worker(r Request) (ParseResult, error){
 	log.Printf("fetcher url : %s", r.Url)
 	body, err := fetcher.Fetch(r.Url)
 	if err != nil {
