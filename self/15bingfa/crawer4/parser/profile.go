@@ -2,7 +2,7 @@ package parser
 
 import (
 	_ "fmt"
-	"go-study/self/15bingfa/crawer2/engine"
+	"go-study/self/15bingfa/crawer4/engine"
 	"go-study/self/model"
 	"regexp"
 	"strconv"
