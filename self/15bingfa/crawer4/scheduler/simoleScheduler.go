@@ -1,6 +1,6 @@
 package scheduler
 
-import "go-study/self/15bingfa/crawer2/engine"
+import "go-study/self/15bingfa/crawer4/engine"
 
 //实现 scheduler interface
 

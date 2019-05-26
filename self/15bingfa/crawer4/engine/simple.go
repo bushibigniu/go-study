@@ -1,7 +1,7 @@
 package engine
 
 import (
-	"go-study/self/15bingfa/crawer2/fetcher"
+	"go-study/self/15bingfa/crawer4/fetcher"
 	"log"
 )
 

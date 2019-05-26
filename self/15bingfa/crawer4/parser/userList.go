@@ -1,7 +1,7 @@
 package parser
 
 import (
-	"go-study/self/15bingfa/crawer2/engine"
+	"go-study/self/15bingfa/crawer4/engine"
 	"regexp"
 )
 

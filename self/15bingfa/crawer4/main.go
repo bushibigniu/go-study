@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go-study/self/15bingfa/crawer2/engine"
-	"go-study/self/15bingfa/crawer2/parser"
-	"go-study/self/15bingfa/crawer2/scheduler"
+	"go-study/self/15bingfa/crawer4/engine"
+	"go-study/self/15bingfa/crawer4/parser"
+	"go-study/self/15bingfa/crawer4/scheduler"
 )
 /**
 	scheduler 实现第一步：所有worker 公用一个输入
