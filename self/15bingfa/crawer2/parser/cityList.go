@@ -20,7 +20,7 @@ func ParseCityList(content []byte) engine.ParseResult {
 	matchs := re.FindAllSubmatch(content, -1)
 
 	result := engine.ParseResult{}
-	limitCity := 3
+	limitCity := 300
 	for _, m := range matchs {
 		//这边强转 为string, 防止类型不对
 		//item 地名
