@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 )
+//time.Tick 每100ms 发送一个 request ，防止反爬虫
 
 func Fetch(url string) ([]byte, error) {
 

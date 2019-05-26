@@ -16,9 +16,9 @@ func (s *SimpleScheduler) Submit(r engine.Request)  {
 	//v1 s.workerChan <- r
 
 	//v2 解决卡死，循环等待问题
-	go func(){
-		s.workerChan <- r
-	}()
+	//这行关键，每个 request 创建一个 goroutine
+	//存在问题：控制力度小，无法控制 goroutine
+	go func(){ s.workerChan <- r }()
 
 }
 
