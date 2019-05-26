@@ -1,17 +1,18 @@
 package parser
 
 import (
-	"fmt"
+	_ "fmt"
 	"go-study/self/crawer3/engine"
 	"go-study/self/crawer3/model"
 	"regexp"
 	"strconv"
 )
-
+//使用这个正则，使用 ParseUserProfile，因为实际情况正则不一样
 //<div data-v-bff6f798="" class="m-btn purple">未婚</div>
 const regexpInfo  = `<div (.*?)class="m-btn purple"(.*?)>([^<]+)</div>`
 const regexpInfo2  = `<div (.*?)class="m-btn pink"(.*?)>([^<]+)</div>`
 
+//在这边初始化时为了提高性能，多个的时候，不需要每个都去实例化，而是在初始化就做掉
 const age  = `<td><span class="label">年龄：</span>([\d]+)岁</td>`
 var ageRe = regexp.MustCompile(age)
 
@@ -37,11 +38,13 @@ func ParseUserProfile2(contents []byte) engine.ParseResult {
 
 	if err != nil {
 		//age
-		profile.Age = age
+		profile.Age = string(age)
 	}
 
-	//
-	profile.Marriage = extractString(contents, marrages)
+	//marrages 是字符串， 直接使用
+	//profile.Marriage = extractString(contents, marrages)
+
+	return engine.ParseResult{}
 }
 
 func extractString(content []byte, re *regexp.Regexp) string{
