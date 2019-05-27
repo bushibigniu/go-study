@@ -22,7 +22,7 @@ func main()  {
 	//它是指针接收者，需要定个变量
 
 	e := engine.ConcurrentEngine{
-		Scheduler: &scheduler.SimpleScheduler{},
+		Scheduler: &scheduler.QueueScheduler{},
 		WorkerCount:10, //没定这个会没反应
 	}
 	e.Run(engine.Request{

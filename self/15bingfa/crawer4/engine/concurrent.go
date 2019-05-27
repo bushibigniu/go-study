@@ -14,18 +14,29 @@ type ConcurrentEngine struct {
 type Scheduler interface {
 	Submit(Request)
 	ConfigureMasterWorkChan(chan Request)
+	WorkerReady(chan Request)
+	Run()
 }
 
 //scheduler 实现第一步：所有worker 公用一个输入
+//			 (带来问题：卡死，循环等待问题)
+//scheduler 实现第2步：并发分发 request (每个request 创建一个goroutine)
+			//(带来问题：控制力度小，无法控制 goroutine)
+//scheduler 实现第3步：实现 requests 队列 和 worker 队列
 func (e *ConcurrentEngine) Run(seed ...Request) {
 
-	in := make(chan Request)
+	//in := make(chan Request)
+	//out := make(chan ParseResult)
+	//e.Scheduler.ConfigureMasterWorkChan(in)
+
+	//v2
 	out := make(chan ParseResult)
-	e.Scheduler.ConfigureMasterWorkChan(in)
+	e.Scheduler.Run()
 
 	for i:=0;i< e.WorkerCount ; i++ {
 		//这边的worker 做：把scheduler 的 in  处理完， 输出 out 给 engine
-		createWorker(in, out)
+		//createWorker(in, out)
+		createWorker(out, e.Scheduler)
 	}
 
 	for _, r := range seed {
@@ -50,11 +61,16 @@ func (e *ConcurrentEngine) Run(seed ...Request) {
 
 }
 
-func createWorker(in chan Request, out chan ParseResult)  {
+//func createWorker(in chan Request, out chan ParseResult)  {
+func createWorker(out chan ParseResult, s Scheduler)  {
+
+	in := make(chan Request)
 
 	//不断从 in 收集request, 不断 out 处理
 	go func() {
 		for  {
+			//tell scheduler i am ready
+			s.WorkerReady(in)
 			request := <- in
 			result , err := worker(request)
 			if err != nil {
