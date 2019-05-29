@@ -10,12 +10,28 @@ type ConcurrentEngine struct {
 
 }
 
+/**
+	这边虽然定义了interface，
+	但go 的interface 是使用者定义的
+	所以，只需要实现 Scheduler，下面的所有方法即可
+	不需要 Scheduler，ReadyScheduler 两个 都实现
+
+ */
+
 //add scheduler func
 type Scheduler interface {
 	Submit(Request)
-	ConfigureMasterWorkChan(chan Request)
-	WorkerReady(chan Request)
+	//ConfigureMasterWorkChan(chan Request)
 	Run()
+	//我有一个worker ,给我那个chan 呢？
+	WorkerChan() chan Request
+	ReadyScheduler
+}
+
+//将 WorkerReady 独立出来，不然传整个Scheduler 太重了
+type ReadyScheduler interface {
+	//每个 worker 公用一个chan,还是每个chan 自己一个chan,这个只有scheduler 知道
+	WorkerReady(chan Request)
 }
 
 //scheduler 实现第一步：所有worker 公用一个输入
@@ -36,7 +52,8 @@ func (e *ConcurrentEngine) Run(seed ...Request) {
 	for i:=0;i< e.WorkerCount ; i++ {
 		//这边的worker 做：把scheduler 的 in  处理完， 输出 out 给 engine
 		//createWorker(in, out)
-		createWorker(out, e.Scheduler)
+
+		createWorker(e.Scheduler.WorkerChan() ,out, e.Scheduler)//向scheduler 要一个chan
 	}
 
 	for _, r := range seed {
@@ -61,16 +78,17 @@ func (e *ConcurrentEngine) Run(seed ...Request) {
 
 }
 
-//func createWorker(in chan Request, out chan ParseResult)  {
-func createWorker(out chan ParseResult, s Scheduler)  {
+//v1 func createWorker(in chan Request, out chan ParseResult)  {
+//v2 func createWorker(out chan ParseResult, s Scheduler)  {
+func createWorker(in chan Request,out chan ParseResult, ready ReadyScheduler)  {
 
-	in := make(chan Request)
+	//in := make(chan Request)
 
 	//不断从 in 收集request, 不断 out 处理
 	go func() {
 		for  {
 			//tell scheduler i am ready
-			s.WorkerReady(in)
+			ready.WorkerReady(in)
 			request := <- in
 			result , err := worker(request)
 			if err != nil {

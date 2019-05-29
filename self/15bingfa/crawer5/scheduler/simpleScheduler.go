@@ -10,6 +10,17 @@ type SimpleScheduler struct {
 
 }
 
+func (s *SimpleScheduler) WorkerReady(w chan engine.Request)  {
+}
+
+func (s *SimpleScheduler) Run() {
+	s.workerChan = make(chan engine.Request)
+}
+
+func (s *SimpleScheduler) WorkerChan() chan engine.Request {
+	return s.workerChan
+}
+
 //scheduler 实现第一步：所有worker 公用一个输入
 //			 (带来问题：卡死，循环等待问题)
 //scheduler 实现第2步：并发分发 request (每个request 创建一个goroutine)
@@ -31,6 +42,6 @@ func (s *SimpleScheduler) Submit(r engine.Request)  {
 }
 
 //ConfigureMasterWorkChan 会改变 scheduler 内容 所以用 指针
-func (s *SimpleScheduler) ConfigureMasterWorkChan(c chan engine.Request)  {
-	s.workerChan = c
-}
+//func (s *SimpleScheduler) ConfigureMasterWorkChan(c chan engine.Request)  {
+//	s.workerChan = c
+//}

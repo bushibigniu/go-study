@@ -19,7 +19,7 @@ func ParseUser(body []byte)  engine.ParseResult{
 	matchs := re.FindAllSubmatch(body, -1)
 
 	result := engine.ParseResult{}
-	limit := 8
+	limit := 10
 	for _, m := range matchs{
 
 		//string(m[2]) 其实这个就是用户的名字，所以可以存下来，直接用，不需要再次获取
