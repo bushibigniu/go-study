@@ -1,17 +1,20 @@
 package parser
 
 import (
-	"go-study/self/15bingfa/crawer5/engine"
+	"go-study/self/15bingfa/crawer6/engine"
 	"regexp"
 )
 
 //<a href="http://album.zhenai.com/u/1997037559" target="_blank">安静</a>
-const regexpUser  = `<a href="(http://album.zhenai.com/u/[0-9]+)" [^>]*>([^<]+)</a>`
+const regexpUser2  = `<a href="(http://album.zhenai.com/u/[0-9]+)" [^>]*>([^<]+)</a>`
+
+//next page http://www.zhenai.com/zhenghun/shanghai/2
+const rePage = `href="h(ttp://www.zhenai.com/zhenghun/[^"]+)"`
 
 
-func ParseUser(body []byte)  engine.ParseResult{
+func ParsePageUser(body []byte)  engine.ParseResult{
 
-	re := regexp.MustCompile(regexpUser)
+	re := regexp.MustCompile(regexpUser2)
 
 	//matchs 这样的一个个集合，matchs[0],matchs[1],matchs[2]
 	//[<a href="http://album.zhenai.com/u/1525150912" target="_blank">
@@ -19,7 +22,7 @@ func ParseUser(body []byte)  engine.ParseResult{
 	matchs := re.FindAllSubmatch(body, -1)
 
 	result := engine.ParseResult{}
-	limit := 10
+	limit := 8
 	for _, m := range matchs{
 
 		//string(m[2]) 其实这个就是用户的名字，所以可以存下来，直接用，不需要再次获取
@@ -46,6 +49,18 @@ func ParseUser(body []byte)  engine.ParseResult{
 		}
 
 	}
+
+	rePageUser := regexp.MustCompile(rePage)
+	matchs = rePageUser.FindAllSubmatch(body, -1)
+	for _, m := range matchs{
+		result.Requests = append(result.Requests, engine.Request{
+			Url:string(m[1]),
+			ParserFunc:ParsePageUser,
+		})
+	}
+
+
+
 
 	return result
 
