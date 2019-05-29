@@ -9,7 +9,7 @@ import (
 const regexpUser2  = `<a href="(http://album.zhenai.com/u/[0-9]+)" [^>]*>([^<]+)</a>`
 
 //next page http://www.zhenai.com/zhenghun/shanghai/2
-const rePage = `href="h(ttp://www.zhenai.com/zhenghun/[^"]+)"`
+const rePage = `href="(http://www.zhenai.com/zhenghun/[^"]+)"`
 
 
 func ParsePageUser(body []byte)  engine.ParseResult{
@@ -58,9 +58,6 @@ func ParsePageUser(body []byte)  engine.ParseResult{
 			ParserFunc:ParsePageUser,
 		})
 	}
-
-
-
 
 	return result
 
