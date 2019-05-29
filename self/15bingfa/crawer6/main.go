@@ -11,7 +11,8 @@ import (
  */
 func main()  {
 
-	url := "http://www.zhenai.com/zhenghun"
+	//url := "http://www.zhenai.com/zhenghun"
+	urlsh := "http://www.zhenai.com/zhenghun/shanghai"
 
 	//simple
 	//engine.SimpleEngine{}.Run(engine.Request{
@@ -25,8 +26,14 @@ func main()  {
 		Scheduler: &scheduler.QueueScheduler{},
 		WorkerCount:10, //没定这个会没反应
 	}
+	//e.Run(engine.Request{
+	//	Url:url,
+	//	ParserFunc:parser.ParseCityList,
+	//})
+
+	//指定获取上海用户，并且获取分页数据
 	e.Run(engine.Request{
-		Url:url,
-		ParserFunc:parser.ParseCityList,
+		Url:urlsh,
+		ParserFunc:parser.ParsePageUser,
 	})
 }
