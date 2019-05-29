@@ -43,12 +43,14 @@ func (e *ConcurrentEngine) Run(seed ...Request) {
 		e.Scheduler.Submit(r)
 	}
 
+	itemNum := 0
 	for  {
 		//这边的out 和上面的对应， 这时候 engine 收到的 out(也就是 requests, items)
 		//要给 scheduler 处理
 		result := <- out
 		for _,item := range result.Items{
-			log.Printf("got item : %v", item)
+			log.Printf("got item #%d: %v", itemNum,item)
+			itemNum++
 		}
 
 		//这边掉起 scheduler
